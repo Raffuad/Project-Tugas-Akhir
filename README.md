@@ -6,9 +6,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 </p>
 
-# 💼 Sistem Absensi & Penggajian Karyawan (Laravel 12)
+# 💼 Sistem Absensi & Penggajian Karyawan (Laravel 13)
 
-Selamat datang di Sistem Absensi & HRIS, sebuah aplikasi web komprehensif yang dibangun dari nol menggunakan Laravel 12. Proyek ini dirancang sebagai studi kasus nyata untuk mendemonstrasikan implementasi arsitektur Laravel yang bersih, aman, dan profesional.
+Selamat datang di Sistem Absensi & HRIS, sebuah aplikasi web komprehensif yang dibangun dari nol menggunakan Laravel 13. Proyek ini dirancang sebagai studi kasus nyata untuk mendemonstrasikan implementasi arsitektur Laravel yang bersih, aman, dan profesional.
 
 Aplikasi ini mengelola alur kerja esensial manajemen sumber daya manusia, mulai dari absensi harian dengan validasi canggih, alur persetujuan lembur dan cuti, hingga perhitungan gaji otomatis yang siap cetak dalam format PDF. Semua disajikan dalam antarmuka yang modern, responsif, dan intuitif berkat Tailwind CSS.
 
@@ -16,7 +16,7 @@ Aplikasi ini mengelola alur kerja esensial manajemen sumber daya manusia, mulai 
 > "Aku tidak berilmu; yang berilmu hanyalah DIA. Jika tampak ilmu dariku, itu hanyalah pantulan dari Cahaya-Nya."
 
 ## 🎥 Demo
-![Demo](./ujicoba.gif)
+
 
 ## 📖 Daftar Isi
 1. [Fitur Utama](#-fitur-utama)
@@ -58,7 +58,7 @@ Sistem login yang aman dengan tiga tingkat akses berbeda:
 ## 🛠️ Teknologi yang Digunakan
 | Komponen       | Teknologi                               |
 |----------------|-----------------------------------------|
-| Backend        | PHP 8.2, Laravel 12                     |
+| Backend        | PHP 8.2, Laravel 13                     |
 | Frontend       | Blade, Tailwind CSS, Alpine.js          |
 | Database       | MySQL / MariaDB                         |
 | Server Lokal   | XAMPP / Laragon                         |
@@ -87,7 +87,7 @@ Pastikan perangkat lunak berikut sudah terinstal di komputer Anda:
 1.  **Clone Repositori**
     Buka terminal, navigasikan ke direktori kerja Anda, lalu jalankan:
     ```bash
-    git clone [https://github.com/Alghifari888/sistem_cuti_karyawan.git](https://github.com/Alghifari888/sistem_cuti_karyawan.git)
+    git clone [https://github.com/Raffuad/Project-Tugas-Akhir.git](https://github.com/Raffuad/Project-Tugas-Akhir.git)
     cd sistem_cuti_karyawan
     ```
 
@@ -105,13 +105,13 @@ Pastikan perangkat lunak berikut sudah terinstal di komputer Anda:
     ```
 
 4.  **Setup Database**
-    - Buat sebuah database baru di server MySQL Anda (misalnya, melalui phpMyAdmin) dengan nama `db_sistem_absensi`.
+    - Buat sebuah database baru di server MySQL Anda (misalnya, melalui phpMyAdmin) dengan nama `db_sistem_absensi_cuti`.
     - Buka file `.env` dan sesuaikan konfigurasinya:
     ```env
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
-    DB_DATABASE=db_sistem_absensi
+    DB_DATABASE=db_sistem_absensi_cuti
     DB_USERNAME=root
     DB_PASSWORD=
     ```
@@ -213,15 +213,15 @@ Metode ini bersifat manual jika tidak ada akses terminal.
 Setelah instalasi dan seeding berhasil, Anda dapat login menggunakan akun berikut:
 
 -   **Admin**
-    -   **Email:** `admin@example.com`
+    -   **Email:** `admin@gmail.com`
     -   **Password:** `password`
 
 -   **Atasan**
-    -   **Email:** `atasan@example.com`
+    -   **Email:** `atasan@gamil.com.com`
     -   **Password:** `password`
 
 -   **Karyawan**
-    -   **Email:** `karyawan@example.com`
+    -   **Email:** `karyawan@gmail.com.com`
     -   **Password:** `password`
 
 ## 📁 Struktur Folder & File
@@ -242,50 +242,8 @@ sistem-absensi/
     └── views/              # Tampilan Blade
 ```
 
-## 📣 Panduan Kontribusi
 
-Kami menyambut baik kontribusi dari siapa pun.
 
-### Melalui Fork (Untuk Non-Kolaborator)
-1. Fork repositori ini.
-2. Clone fork Anda: `git clone https://github.com/NAMA_ANDA/sistem_cuti_karyawan.git`
-3. Buat branch baru: `git checkout -b fitur/nama-fitur-baru`
-4. Lakukan perubahan, commit, dan push.
-5. Buat Pull Request dari fork Anda ke repositori ini.
-
-### ✅ Pedoman Kontribusi
-- Ikuti standar PSR-12 dan gaya kode Laravel.
-- Gunakan format Conventional Commits untuk pesan commit yang jelas.
-- Fokus pada satu fitur atau perbaikan per Pull Request.
-
-Terima kasih telah berkontribusi! 🙌
-
-## 📄 License (English)
-
-This project is licensed under the MIT License.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-
----
-
-## 📄 Lisensi (Indonesia)
-
-Proyek ini dilisensikan di bawah Lisensi MIT.
-
-Hak Cipta (c) 2025 Alghifari888
-
-Proyek ini menggunakan Lisensi MIT, yang berarti Anda bebas menggunakan, menyalin, mengubah, dan mendistribusikan perangkat lunak ini, termasuk untuk keperluan komersial, selama menyertakan pemberitahuan hak cipta dan lisensi asli.
-
-Perangkat lunak ini disediakan apa adanya tanpa jaminan apa pun. Pengembang tidak bertanggung jawab atas kerusakan atau masalah yang timbul dari penggunaan perangkat lunak ini.
+# Project-Tugas-Akhir
+# Project-Tugas-Akhir
 # Project-Tugas-Akhir
