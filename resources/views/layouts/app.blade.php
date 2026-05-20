@@ -70,6 +70,10 @@
                             <x-heroicon-s-chart-bar class="w-6 h-6 mr-3" />
                             <span>Laporan Absensi</span>
                         </x-sidebar-link>
+                        <x-sidebar-link :href="route('laporan.cuti.index')" :active="request()->routeIs('laporan.cuti.*')">
+                            <x-heroicon-s-document-chart-bar class="w-6 h-6 mr-3" />
+                            <span>Laporan Cuti</span>
+                        </x-sidebar-link>
                     @endif
 
                     @if(auth()->user()->isAdmin())

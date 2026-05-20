@@ -7,7 +7,9 @@
 
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+    <link rel="preload" href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet"></noscript>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script>
@@ -57,28 +59,27 @@
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.75);
-            box-shadow: 0 28px 80px rgba(15, 23, 42, 0.12);
+            background: rgba(248, 251, 255, 0.92);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.80);
+            box-shadow: 0 8px 40px rgba(15, 23, 42, 0.10);
         }
 
         .dark .glass {
-            background: rgba(15, 23, 42, 0.72);
+            background: rgba(15, 23, 42, 0.90);
             border: 1px solid rgba(148, 163, 184, 0.18);
-            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.30);
         }
 
         .soft-card {
-            background: rgba(255, 255, 255, 0.84);
-            backdrop-filter: blur(18px);
-            border: 1px solid rgba(226, 232, 240, 0.9);
-            box-shadow: 0 22px 50px rgba(15, 23, 42, 0.10);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
         }
 
         .dark .soft-card {
-            background: rgba(15, 23, 42, 0.82);
+            background: rgba(15, 23, 42, 0.95);
             border: 1px solid rgba(148, 163, 184, 0.18);
         }
 
@@ -102,23 +103,66 @@
 
         .float-up {
             animation: floatUp 5.5s ease-in-out infinite;
+            will-change: transform;
         }
 
         .pulse-glow {
             animation: pulseGlow 4s ease-in-out infinite;
+            will-change: box-shadow;
+        }
+        /* Page Loader */
+        #page-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8fbff 0%, #eef5ff 100%);
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        .dark #page-loader {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+        }
+        #page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-ring {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(37, 99, 235, 0.15);
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Lazy sections */
+        .lazy-section {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 400px;
         }
     </style>
 </head>
 
 <body class="min-h-screen premium-bg text-slate-800 dark:text-slate-100 transition-colors duration-500">
 
+    {{-- Page Loader --}}
+    <div id="page-loader">
+        <div class="text-center">
+            <div class="loader-ring mx-auto"></div>
+            <p class="mt-4 text-sm font-semibold text-slate-500 dark:text-slate-400">Memuat...</p>
+        </div>
+    </div>
+
     <main class="relative min-h-screen overflow-hidden">
 
         {{-- Background digital --}}
         <div class="absolute inset-0 digital-grid opacity-80"></div>
-        <div class="absolute -top-36 -left-24 w-[28rem] h-[28rem] rounded-full bg-blue-400/20 blur-3xl"></div>
-        <div class="absolute top-28 -right-24 w-[30rem] h-[30rem] rounded-full bg-indigo-400/20 blur-3xl"></div>
-        <div class="absolute bottom-20 left-1/2 -translate-x-1/2 w-[40rem] h-[18rem] rounded-full bg-cyan-300/15 blur-3xl"></div>
+        <div class="absolute -top-36 -left-24 w-64 h-64 rounded-full bg-blue-400/15 blur-2xl"></div>
+        <div class="absolute top-28 -right-24 w-64 h-64 rounded-full bg-indigo-400/15 blur-2xl"></div>
 
         {{-- Navbar --}}
         <nav class="relative z-50 px-5 pt-6">
@@ -313,13 +357,15 @@
         </section>
 
         {{-- Tentang --}}
-        <section id="tentang" class="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 mt-8">
+        <section id="tentang" class="lazy-section relative z-10 max-w-6xl mx-auto px-6 lg:px-10 mt-8">
             <div class="glass rounded-[2rem] p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 <div class="md:col-span-4">
                     <div class="relative h-56 rounded-[1.75rem] bg-gradient-to-br from-blue-100 via-white to-indigo-100 dark:from-blue-950 dark:via-slate-900 dark:to-indigo-950 border border-white/70 dark:border-slate-700 flex items-center justify-center overflow-hidden">
                         <div class="absolute inset-0 digital-grid opacity-60"></div>
                         <div class="relative text-8xl float-up"><img src="{{ asset('images/gedung.png') }}"
      alt="Ilustrasi Sistem Absensi HRIS"
+     loading="lazy"
+     decoding="async"
      class="relative w-45 h-45 object-contain float-up"></div>
                     </div>
                 </div>
@@ -345,7 +391,7 @@
         </section>
 
         {{-- Fitur --}}
-        <section id="fitur" class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 mt-10 pb-10">
+        <section id="fitur" class="lazy-section relative z-10 max-w-7xl mx-auto px-6 lg:px-10 mt-10 pb-10">
             <div class="text-center mb-8">
                 <span class="inline-flex px-4 py-2 rounded-full bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-700 font-black text-blue-700 dark:text-blue-300 text-sm">
                     Fitur Utama
@@ -416,7 +462,7 @@
         </section>
 
         {{-- Keunggulan --}}
-        <section id="keunggulan" class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pb-16">
+        <section id="keunggulan" class="lazy-section relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pb-16">
             <div class="glass rounded-[2rem] p-8 md:p-10">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                     <div class="p-6 rounded-3xl bg-white/65 dark:bg-slate-800/65 border border-slate-100 dark:border-slate-700">
@@ -460,6 +506,16 @@
         </footer>
 
     </main>
+
+    <script>
+        // Hide loader as soon as DOM is ready
+        document.addEventListener('DOMContentLoaded', function () {
+            var loader = document.getElementById('page-loader');
+            if (loader) loader.classList.add('hidden');
+        });
+    </script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </body>
 </html>

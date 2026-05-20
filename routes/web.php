@@ -21,8 +21,9 @@ use App\Http\Controllers\Atasan\OvertimeController as AtasanOvertimeController;
 use App\Http\Controllers\Karyawan\LeaveController as KaryawanLeaveController;
 use App\Http\Controllers\Karyawan\OvertimeController as KaryawanOvertimeController;
 
-// Laporan Controller
+// Laporan Controllers
 use App\Http\Controllers\Laporan\AbsensiController as LaporanAbsensiController;
+use App\Http\Controllers\Laporan\CutiController as LaporanCutiController;
 
 // Models for Dashboard Data
 use App\Models\User;
@@ -156,7 +157,13 @@ Route::middleware('auth')->group(function () {
     // GROUPING ROUTE UNTUK LAPORAN (Admin & Atasan)
     // ======================================================
     Route::middleware(['role:admin,atasan'])->prefix('laporan')->name('laporan.')->group(function() {
+        // Laporan Absensi
         Route::get('absensi', [LaporanAbsensiController::class, 'index'])->name('absensi.index');
+        Route::get('absensi/export', [LaporanAbsensiController::class, 'export'])->name('absensi.export');
+
+        // Laporan Cuti
+        Route::get('cuti', [LaporanCutiController::class, 'index'])->name('cuti.index');
+        Route::get('cuti/export', [LaporanCutiController::class, 'export'])->name('cuti.export');
     });
 });
 

@@ -8,7 +8,9 @@
     <title>Login - Sistem Absensi & HRIS</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+    <link rel="preload" href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet"></noscript>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -32,11 +34,11 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.80);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+            background: rgba(252, 253, 255, 0.96);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 40px rgba(15, 23, 42, 0.10);
         }
 
         .brand-panel {
@@ -62,19 +64,43 @@
 
         .floating-orb {
             animation: floatOrb 6s ease-in-out infinite;
+            will-change: transform;
         }
 
         @keyframes floatOrb {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-12px); }
         }
+        /* Page Loader */
+        #page-loader {
+            position: fixed; inset: 0; z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #f8fbff 0%, #eef5ff 100%);
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        #page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-ring {
+            width: 44px; height: 44px;
+            border: 4px solid rgba(37, 99, 235, 0.15);
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 
 <body class="min-h-screen premium-bg text-slate-800">
+
+    <div id="page-loader">
+        <div class="text-center">
+            <div class="loader-ring mx-auto"></div>
+            <p class="mt-4 text-sm font-semibold text-slate-500">Memuat...</p>
+        </div>
+    </div>
     <div class="absolute inset-0 digital-grid opacity-70"></div>
-    <div class="absolute top-0 left-0 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-80 h-80 bg-indigo-400/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-0 left-0 w-48 h-48 bg-blue-400/15 rounded-full blur-2xl"></div>
+    <div class="absolute bottom-0 right-0 w-56 h-56 bg-indigo-400/15 rounded-full blur-2xl"></div>
 
     <div class="relative min-h-screen flex items-center justify-center px-4 py-8">
         <div class="w-full max-w-6xl rounded-[2rem] overflow-hidden glass-card grid grid-cols-1 lg:grid-cols-2">
@@ -219,6 +245,10 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var loader = document.getElementById('page-loader');
+            if (loader) loader.classList.add('hidden');
+        });
         function togglePassword() {
             const password = document.getElementById('password');
             password.type = password.type === 'password' ? 'text' : 'password';

@@ -23,7 +23,6 @@
                         </x-nav-link>
                     @endif
                     
-                    {{-- Menu Khusus Atasan --}}
                     @if(auth()->user()->isAtasan())
                         <x-nav-link :href="route('atasan.overtime.index')" :active="request()->routeIs('atasan.overtime.*')">
                             {{ __('Persetujuan Lembur') }}
@@ -34,9 +33,11 @@
                         <x-nav-link :href="route('laporan.absensi.index')" :active="request()->routeIs('laporan.absensi.*')">
                             {{ __('Laporan Absensi') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('laporan.cuti.index')" :active="request()->routeIs('laporan.cuti.*')">
+                            {{ __('Laporan Cuti') }}
+                        </x-nav-link>
                     @endif
 
-                    {{-- Menu Khusus Admin --}}
                     @if(auth()->user()->isAdmin())
                         <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                             {{ __('Manajemen User') }}
@@ -49,6 +50,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('laporan.absensi.index')" :active="request()->routeIs('laporan.absensi.*')">
                             {{ __('Laporan Absensi') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('laporan.cuti.index')" :active="request()->routeIs('laporan.cuti.*')">
+                            {{ __('Laporan Cuti') }}
                         </x-nav-link>
                          <x-nav-link :href="route('admin.payroll.index')" :active="request()->routeIs('admin.payroll.*')">
                             {{ __('Penggajian') }}
@@ -130,6 +134,9 @@
                 <x-responsive-nav-link :href="route('laporan.absensi.index')" :active="request()->routeIs('laporan.absensi.*')">
                     {{ __('Laporan Absensi') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('laporan.cuti.index')" :active="request()->routeIs('laporan.cuti.*')">
+                    {{ __('Laporan Cuti') }}
+                </x-responsive-nav-link>
             @endif
 
             {{-- Menu Khusus Admin (Mobile) --}}
@@ -145,6 +152,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('laporan.absensi.index')" :active="request()->routeIs('laporan.absensi.*')">
                     {{ __('Laporan Absensi') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('laporan.cuti.index')" :active="request()->routeIs('laporan.cuti.*')">
+                    {{ __('Laporan Cuti') }}
                 </x-responsive-nav-link>
                  <x-responsive-nav-link :href="route('admin.payroll.index')" :active="request()->routeIs('admin.payroll.*')">
                     {{ __('Penggajian') }}
