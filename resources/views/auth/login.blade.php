@@ -20,16 +20,16 @@
 
         .premium-bg {
             background:
-                radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.18), transparent 26%),
-                radial-gradient(circle at 90% 15%, rgba(99, 102, 241, 0.16), transparent 28%),
-                radial-gradient(circle at 50% 90%, rgba(14, 165, 233, 0.12), transparent 32%),
-                linear-gradient(135deg, #f8fbff 0%, #eef5ff 45%, #e5ebf6 100%);
+                radial-gradient(circle at 10% 20%, rgba(26, 47, 107, 0.18), transparent 26%),
+                radial-gradient(circle at 90% 15%, rgba(45, 168, 74, 0.14), transparent 28%),
+                radial-gradient(circle at 50% 90%, rgba(30, 95, 168, 0.10), transparent 32%),
+                linear-gradient(135deg, #f0f4ff 0%, #eaf5ee 45%, #dbeafe 100%);
         }
 
         .digital-grid {
             background-image:
-                linear-gradient(rgba(37, 99, 235, 0.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(37, 99, 235, 0.07) 1px, transparent 1px);
+                linear-gradient(rgba(26, 47, 107, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 47, 107, 0.07) 1px, transparent 1px);
             background-size: 42px 42px;
         }
 
@@ -43,7 +43,7 @@
 
         .brand-panel {
             background:
-                linear-gradient(180deg, rgba(30, 64, 175, 0.95), rgba(17, 24, 39, 0.92));
+                linear-gradient(155deg, rgba(26, 47, 107, 0.97) 0%, rgba(10, 30, 70, 0.95) 50%, rgba(15, 60, 30, 0.90) 100%);
         }
 
         .soft-input input {
@@ -58,8 +58,8 @@
         }
 
         .soft-input input:focus {
-            border-color: #2563eb !important;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12) !important;
+            border-color: #1a2f6b !important;
+            box-shadow: 0 0 0 4px rgba(26, 47, 107, 0.12) !important;
         }
 
         .floating-orb {
@@ -75,14 +75,14 @@
         #page-loader {
             position: fixed; inset: 0; z-index: 9999;
             display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #f8fbff 0%, #eef5ff 100%);
+            background: linear-gradient(135deg, #f0f4ff 0%, #eaf5ee 100%);
             transition: opacity 0.35s ease, visibility 0.35s ease;
         }
         #page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .loader-ring {
             width: 44px; height: 44px;
-            border: 4px solid rgba(37, 99, 235, 0.15);
-            border-top-color: #2563eb;
+            border: 4px solid rgba(26, 47, 107, 0.15);
+            border-top-color: #1a2f6b;
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
         }
@@ -99,8 +99,8 @@
         </div>
     </div>
     <div class="absolute inset-0 digital-grid opacity-70"></div>
-    <div class="absolute top-0 left-0 w-48 h-48 bg-blue-400/15 rounded-full blur-2xl"></div>
-    <div class="absolute bottom-0 right-0 w-56 h-56 bg-indigo-400/15 rounded-full blur-2xl"></div>
+    <div class="absolute top-0 left-0 w-48 h-48 rounded-full blur-2xl" style="background:rgba(26,47,107,0.15)"></div>
+    <div class="absolute bottom-0 right-0 w-56 h-56 rounded-full blur-2xl" style="background:rgba(45,168,74,0.15)"></div>
 
     <div class="relative min-h-screen flex items-center justify-center px-4 py-8">
         <div class="w-full max-w-6xl rounded-[2rem] overflow-hidden glass-card grid grid-cols-1 lg:grid-cols-2">
@@ -114,7 +114,7 @@
                         </div>
                         <div>
                             <h2 class="text-2xl font-black">Absensi HRIS</h2>
-                            <p class="text-sm text-blue-100">Smart Attendance System</p>
+                            <p class="text-sm" style="color:rgba(167,220,180,0.9)">Smart Attendance System</p>
                         </div>
                     </a>
                 </div>
@@ -129,19 +129,19 @@
                         Selamat datang kembali.
                     </h1>
 
-                    <p class="text-blue-100 text-lg leading-relaxed max-w-md">
+                    <p class="text-lg leading-relaxed max-w-md" style="color:rgba(200,225,210,0.9)">
                         Masuk ke sistem untuk mengelola absensi QR Code berbasis GPS, cuti, lembur, dan slip gaji digital dengan lebih cepat dan terstruktur.
                     </p>
 
                    
                 </div>
 
-                <div class="text-sm text-blue-100">
+                <div class="text-sm" style="color:rgba(180,215,195,0.85)">
                     © {{ date('Y') }} Sistem Absensi & HRIS
                 </div>
 
-                <div class="absolute top-10 right-10 w-28 h-28 rounded-full bg-cyan-300/20 blur-2xl floating-orb"></div>
-                <div class="absolute bottom-16 right-16 w-20 h-20 rounded-full bg-indigo-300/20 blur-2xl floating-orb"></div>
+                <div class="absolute top-10 right-10 w-28 h-28 rounded-full blur-2xl floating-orb" style="background:rgba(45,168,74,0.25)"></div>
+                <div class="absolute bottom-16 right-16 w-20 h-20 rounded-full blur-2xl floating-orb" style="background:rgba(30,95,168,0.20)"></div>
             </div>
 
             {{-- Kanan --}}
@@ -193,7 +193,7 @@
                             <div class="flex items-center justify-between mb-2">
                                 <x-input-label for="password" :value="__('Password')" class="font-semibold text-slate-700" />
                                 @if (Route::has('password.request'))
-                                    <a class="text-sm font-semibold text-blue-600 hover:text-blue-700" href="{{ route('password.request') }}">
+                                    <a class="text-sm font-semibold hover:underline" href="{{ route('password.request') }}" style="color:#1a2f6b">
                                         Lupa password?
                                     </a>
                                 @endif
@@ -218,14 +218,14 @@
 
                         <div class="flex items-center justify-between pt-1">
                             <label for="remember_me" class="inline-flex items-center gap-2">
-                                <input id="remember_me" type="checkbox" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500" name="remember">
+                                <input id="remember_me" type="checkbox" class="rounded border-slate-300 focus:ring-2" style="color:#1a2f6b;accent-color:#1a2f6b" name="remember">
                                 <span class="text-sm text-slate-600 font-medium">{{ __('Ingat saya') }}</span>
                             </label>
                         </div>
 
                         <div class="pt-2">
                             <button type="submit"
-                                class="w-full inline-flex items-center justify-center px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-sm tracking-wide shadow-xl hover:from-blue-700 hover:to-indigo-700 hover:-translate-y-1 transition duration-300">
+                                class="w-full inline-flex items-center justify-center px-6 py-4 rounded-2xl text-white font-black text-sm tracking-wide shadow-xl hover:-translate-y-1 transition duration-300" style="background:linear-gradient(to right,#1a2f6b,#2da84a)">
                                 LOG IN
                             </button>
                         </div>
@@ -233,7 +233,7 @@
                         @if (Route::has('register'))
                             <p class="text-center text-sm text-slate-500 pt-2">
                                 Belum punya akun?
-                                <a href="{{ route('register') }}" class="font-bold text-blue-600 hover:text-blue-700">
+                                <a href="{{ route('register') }}" class="font-bold hover:underline" style="color:#1a2f6b">
                                     Register sekarang
                                 </a>
                             </p>

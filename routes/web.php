@@ -45,7 +45,41 @@ use App\Models\AuditLog;
 
 // Halaman landing page utama
 Route::get('/', function () {
-    return view('welcome');
+    $totalKaryawan = \App\Models\User::where('role', 'karyawan')->count();
+    
+    // 1. Hadir Hari Ini
+    $hadirHariIniCount = \App\Models\Attendance::whereDate('attendance_date', now()->toDateString())->count();
+    $hadirHariIniPersen = $totalKaryawan > 0 ? round(($hadirHariIniCount / $totalKaryawan) * 100) : 0;
+    
+    // 2. Cuti Aktif
+    $cutiAktifCount = \App\Models\Leave::where('status', 'approved')
+        ->whereDate('start_date', '<=', now()->toDateString())
+        ->whereDate('end_date', '>=', now()->toDateString())
+        ->count();
+
+    // 3. QR Check-in Persen
+    $qrCheckInPersen = $hadirHariIniPersen;
+
+    // 4. Valid GPS Persen
+    $todayAttendances = \App\Models\Attendance::whereDate('attendance_date', now()->toDateString())->get();
+    $validGpsCount = $todayAttendances->filter(function($att) {
+        return $att->check_in_location && $att->check_in_location !== 'Lokasi tidak tersedia';
+    })->count();
+    $validGpsPersen = $todayAttendances->count() > 0 
+        ? round(($validGpsCount / $todayAttendances->count()) * 100) 
+        : 0;
+
+    // 5. Slip Gaji Terproses
+    $gajiSetCount = \App\Models\User::where('role', 'karyawan')->where('gaji_pokok', '>', 0)->count();
+    $slipGajiPersen = $totalKaryawan > 0 ? round(($gajiSetCount / $totalKaryawan) * 100) : 0;
+
+    return view('welcome', compact(
+        'hadirHariIniPersen',
+        'cutiAktifCount',
+        'qrCheckInPersen',
+        'validGpsPersen',
+        'slipGajiPersen'
+    ));
 });
 
 // Route dashboard utama yang akan mengarahkan user berdasarkan role

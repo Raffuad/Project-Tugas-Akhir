@@ -14,21 +14,28 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
+    <style>
+        body { font-family: 'Figtree', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0d1b45; }
+        ::-webkit-scrollbar-thumb { background: #2da84a; border-radius: 99px; }
+    </style>
     <body class="font-sans antialiased">
-        <div x-data="{ sidebarOpen: window.innerWidth > 768 }" @resize.window="sidebarOpen = window.innerWidth > 768" class="flex h-screen bg-gray-100">
+        <div x-data="{ sidebarOpen: window.innerWidth > 768 }" @resize.window="sidebarOpen = window.innerWidth > 768" class="flex h-screen" style="background:#f0f4ff">
             <aside 
-                class="fixed inset-y-0 left-0 z-40 w-64 bg-gray-900 text-gray-300 transform transition-transform duration-300 ease-in-out"
+                class="fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out"
+                style="background:linear-gradient(180deg,#0d1b45 0%,#1a2f6b 60%,#0e3d1c 100%);color:#cbd5e1"
                 :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}"
             >
-                <div class="flex items-center justify-center h-20 border-b border-gray-700">
+                <div class="flex items-center justify-center h-20" style="border-bottom:1px solid rgba(255,255,255,0.08)">
                     <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 text-white px-4">
-                        {{-- Ganti src dengan path logo Anda. Contoh: src="{{ asset('images/logo.png') }}" --}}
-                       <div class="w-12 h-12 rounded-2xl overflow-hidden bg-white flex items-center justify-center shadow-md">
-                            <img src="{{ asset('images/logo.png') }}"
-                                  alt="Logo Admin"
-                                  class="w-full h-full object-cover">
+                       <div class="w-11 h-11 rounded-xl overflow-hidden flex items-center justify-center bg-white shadow-sm p-1">
+                            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-full h-full object-contain">
                         </div>
-                        <span class="font-bold text-xl">Dashboard</span>
+                        <div>
+                            <div class="font-black text-sm text-white">Absensi HRIS</div>
+                            <div class="text-xs" style="color:rgba(255,255,255,0.45)">PT Defourd SB</div>
+                        </div>
                     </a>
                 </div>
                 
@@ -52,7 +59,7 @@
                     
                     {{-- Menu Khusus Atasan --}}
                     @if(auth()->user()->isAtasan())
-                         <p class="px-4 pt-4 font-semibold text-gray-400 text-xs uppercase">Persetujuan</p>
+                         <p class="px-4 pt-4 font-semibold text-xs uppercase" style="color:rgba(110,232,154,0.6)">Persetujuan</p>
                         <x-sidebar-link :href="route('atasan.overtime.index')" :active="request()->routeIs('atasan.overtime.*')">
                             <x-heroicon-s-clock class="w-6 h-6 mr-3" />
                             <span>Persetujuan Lembur</span>
@@ -65,7 +72,7 @@
 
                     {{-- Menu Laporan & Admin --}}
                     @if(auth()->user()->isAtasan() || auth()->user()->isAdmin())
-                        <p class="px-4 pt-4 font-semibold text-gray-400 text-xs uppercase">Manajemen</p>
+                        <p class="px-4 pt-4 font-semibold text-xs uppercase" style="color:rgba(110,232,154,0.6)">Manajemen</p>
                         <x-sidebar-link :href="route('laporan.absensi.index')" :active="request()->routeIs('laporan.absensi.*')">
                             <x-heroicon-s-chart-bar class="w-6 h-6 mr-3" />
                             <span>Laporan Absensi</span>
@@ -89,7 +96,7 @@
                             <x-heroicon-s-shield-check class="w-6 h-6 mr-3" />
                             <span>Audit Log</span>
                         </x-sidebar-link>
-                         <p class="px-4 pt-4 font-semibold text-gray-400 text-xs uppercase">Sistem</p>
+                         <p class="px-4 pt-4 font-semibold text-xs uppercase" style="color:rgba(110,232,154,0.6)">Sistem</p>
                         <x-sidebar-link :href="route('admin.qrcode.show')" :active="request()->routeIs('admin.qrcode.*')">
                             <x-heroicon-s-qr-code class="w-6 h-6 mr-3" />
                             <span>QR Code Absensi</span>
@@ -105,15 +112,15 @@
             <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black opacity-50 z-30 md:hidden"></div>
 
             <div class="flex-1 flex flex-col overflow-hidden transition-all duration-300 ease-in-out" :class="{'md:ml-64': sidebarOpen}">
-                <header class="flex justify-between items-center p-4 bg-white border-b z-20">
+                <header class="flex justify-between items-center p-4 z-20" style="background:#fff;border-bottom:2px solid #1a2f6b;box-shadow:0 2px 12px rgba(26,47,107,0.08)">
                     <div class="flex items-center">
-                        <button @click="sidebarOpen = !sidebarOpen" class="text-gray-500 focus:outline-none">
+                        <button @click="sidebarOpen = !sidebarOpen" class="focus:outline-none" style="color:#1a2f6b">
                             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </button>
                         
-                        <div class="font-semibold text-xl text-gray-800 leading-tight ml-4">
+                        <div class="font-bold text-lg leading-tight ml-4" style="color:#1a2f6b">
                             @if (isset($header))
                                 {{ $header }}
                             @endif
@@ -148,7 +155,7 @@
                     </div>
                 </header>
 
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <main class="flex-1 overflow-x-hidden overflow-y-auto p-6" style="background:#f0f4ff">
                     {{ $slot }}
                 </main>
             </div>

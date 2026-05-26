@@ -13,18 +13,17 @@ class AttendanceController extends Controller
 {
     public function store(Request $request)
     {
-        // 1. Validasi input dasar
+        // 1. Validasi input dasar — lokasi opsional jika GPS tidak tersedia
         $request->validate([
-            'location' => ['required', 'string', 'regex:/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/'],
             'qr_token' => 'required|string',
+            'location' => ['nullable', 'string', 'regex:/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/'],
         ], [
-            'location.required' => 'Lokasi belum terdeteksi. Aktifkan GPS lalu coba lagi.',
-            'location.regex' => 'Format lokasi tidak valid. Aktifkan GPS lalu coba lagi.',
             'qr_token.required' => 'QR Code tidak boleh kosong.',
+            'location.regex'    => 'Format lokasi tidak valid.',
         ]);
 
-        $now = Carbon::now();
-        $today = $now->toDateString();
+        $now    = Carbon::now();
+        $today  = $now->toDateString();
         $userId = Auth::id();
 
         // 2. Validasi token QR Code
@@ -32,7 +31,7 @@ class AttendanceController extends Controller
         $validToken = Setting::where('key', $qrTokenKey)->value('value');
 
         if (!$validToken || $request->qr_token !== $validToken) {
-            return Redirect::back()->with('error', 'QR Code tidak valid atau sudah kedaluwarsa.');
+            return Redirect::back()->with('error', 'QR Code tidak valid atau sudah kedaluwarsa. Minta admin untuk membuka halaman QR Code hari ini.');
         }
 
         // 3. Ambil pengaturan sistem
@@ -40,13 +39,13 @@ class AttendanceController extends Controller
 
         $lokasiKantorLat = $settings['lokasi_kantor_lat']->value ?? null;
         $lokasiKantorLon = $settings['lokasi_kantor_lon']->value ?? null;
-        $radiusAbsensi = (float) ($settings['radius_absensi']->value ?? 100);
+        $radiusAbsensi   = (float) ($settings['radius_absensi']->value ?? 100);
 
-        // 4. Parsing lokasi user
-        [$latitude, $longitude] = array_map('floatval', explode(',', $request->location));
+        // 4. Validasi jarak lokasi (hanya jika lokasi tersedia)
+        $locationString = $request->location ?? '';
+        if ($locationString && $lokasiKantorLat && $lokasiKantorLon) {
+            [$latitude, $longitude] = array_map('floatval', explode(',', $locationString));
 
-        // 5. Validasi jarak lokasi
-        if ($lokasiKantorLat && $lokasiKantorLon) {
             $jarak = calculateDistance(
                 $latitude,
                 $longitude,
@@ -57,42 +56,42 @@ class AttendanceController extends Controller
             if ($jarak !== null && $jarak > $radiusAbsensi) {
                 return Redirect::back()->with(
                     'error',
-                    'Anda berada di luar radius. Jarak Anda ' . round($jarak) . ' meter dari kantor.'
+                    'Anda berada di luar radius kantor. Jarak Anda ' . round($jarak) . ' meter (maks: ' . $radiusAbsensi . ' meter).'
                 );
             }
         }
 
-        // 6. Ambil pengaturan waktu
-        $jamMasukSetting = $settings['jam_masuk']->value ?? '08:00:00';
+        // 5. Ambil pengaturan waktu
+        $jamMasukSetting  = $settings['jam_masuk']->value  ?? '08:00:00';
         $jamPulangSetting = $settings['jam_pulang']->value ?? '17:00:00';
 
         $attendance = Attendance::where('user_id', $userId)
             ->where('attendance_date', $today)
             ->first();
 
-        // 7. Logika absen masuk
+        // 6. Logika absen masuk
         if (!$attendance) {
             $waktuMulaiAbsen = Carbon::parse($jamMasukSetting)->subMinutes(40);
 
             if ($now->isBefore($waktuMulaiAbsen)) {
                 return Redirect::back()->with(
                     'error',
-                    'Belum waktunya absen masuk. Anda bisa absen mulai jam ' . $waktuMulaiAbsen->format('H:i')
+                    'Belum waktunya absen masuk. Anda bisa absen mulai jam ' . $waktuMulaiAbsen->format('H:i') . '.'
                 );
             }
 
             if ($now->isAfter(Carbon::parse($jamPulangSetting))) {
-                return Redirect::back()->with('error', 'Waktu absen masuk sudah terlewat.');
+                return Redirect::back()->with('error', 'Waktu absen masuk sudah terlewat (batas jam ' . Carbon::parse($jamPulangSetting)->format('H:i') . ').');
             }
 
             Attendance::create([
-                'user_id' => $userId,
-                'attendance_date' => $today,
-                'check_in_time' => $now->toTimeString(),
-                'check_in_location' => $request->location,
+                'user_id'          => $userId,
+                'attendance_date'  => $today,
+                'check_in_time'    => $now->toTimeString(),
+                'check_in_location'=> $locationString ?: 'Lokasi tidak tersedia',
             ]);
 
-            return Redirect::back()->with('status', 'Absen masuk berhasil dicatat.');
+            return Redirect::back()->with('status', 'Absen masuk berhasil dicatat pukul ' . $now->format('H:i') . '.');
         }
 
         // 8. Logika absen pulang

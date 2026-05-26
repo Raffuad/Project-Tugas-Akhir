@@ -13,29 +13,7 @@
                     Selamat datang, {{ Auth::user()->name }}!
                 </h3>
 
-                {{-- Tampilkan Notifikasi --}}
-                @if (session('status'))
-                    <div id="alert-success" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50" role="alert">
-                       <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                        </svg>
-                       <span class="sr-only">Info</span>
-                       <div class="ms-3 text-sm font-medium">
-                         <span class="font-bold">Sukses!</span> {{ session('status') }}
-                       </div>
-                    </div>
-                @endif
-                @if (session('error'))
-                     <div id="alert-error" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50" role="alert">
-                        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                        </svg>
-                        <span class="sr-only">Info</span>
-                        <div class="ms-3 text-sm font-medium">
-                          <span class="font-bold">Gagal!</span> {{ session('error') }}
-                        </div>
-                     </div>
-                @endif
+                {{-- Notifikasi Absensi dihandle menggunakan SweetAlert2 --}}
 
                 <div class="mt-6 border-t border-gray-200 pt-6">
                     <div class="text-center">
@@ -52,9 +30,20 @@
 
                         {{-- Tombol Aksi & Form --}}
                         @if (!$todayAttendance || !$todayAttendance->check_out_time)
+                            {{-- Status bar untuk feedback real-time --}}
+                            <div id="scan-status" class="hidden my-3 px-4 py-3 rounded-lg text-sm font-medium"></div>
+
+                            {{-- Loading overlay --}}
+                            <div id="loading-overlay" class="hidden items-center justify-center my-4 gap-2 text-indigo-600">
+                                <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                                </svg>
+                                <span id="loading-text">Memproses...</span>
+                            </div>
+
                             <div id="scanner-container" class="w-full max-w-sm mx-auto my-4 text-center" style="display: none;">
                                 <div id="qr-reader" class="border-2 border-dashed rounded-lg p-2"></div>
-                                {{-- Tombol Tutup Kamera --}}
                                 <button type="button" id="close-scanner-button" class="mt-4 inline-flex items-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 active:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                     Tutup Kamera
                                 </button>
@@ -120,82 +109,197 @@
     </div>
 
     @push('scripts')
-    {{-- Library untuk QR Scanner --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // ── JAM ──────────────────────────────────────────────
             const clockElement = document.getElementById('clock');
             function updateClock() {
                 const now = new Date();
-                const hours = String(now.getHours()).padStart(2, '0');
-                const minutes = String(now.getMinutes()).padStart(2, '0');
-                const seconds = String(now.getSeconds()).padStart(2, '0');
-                clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+                clockElement.textContent = [
+                    String(now.getHours()).padStart(2,'0'),
+                    String(now.getMinutes()).padStart(2,'0'),
+                    String(now.getSeconds()).padStart(2,'0')
+                ].join(':');
             }
             setInterval(updateClock, 1000);
             updateClock();
 
-            setTimeout(() => {
-                document.getElementById('alert-success')?.remove();
-                document.getElementById('alert-error')?.remove();
-            }, 5000);
+            // ── SWEETALERT NOTIFICATIONS ─────────────────────────
+            @if (session('status'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sukses!',
+                    text: "{!! addslashes(session('status')) !!}",
+                    confirmButtonColor: '#2da84a'
+                });
+            @endif
 
-            const scanButton = document.getElementById('scan-button');
-            const scannerContainer = document.getElementById('scanner-container');
-            const closeScannerButton = document.getElementById('close-scanner-button');
+            @if (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: "{!! addslashes(session('error')) !!}",
+                    confirmButtonColor: '#1a2f6b'
+                });
+            @endif
+
+            @if ($errors->any())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validasi Gagal!',
+                    html: `<ul style="text-align: left; list-style-type: disc; padding-left: 20px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{!! addslashes($error) !!}</li>
+                        @endforeach
+                    </ul>`,
+                    confirmButtonColor: '#1a2f6b'
+                });
+            @endif
+
+            // ── HELPER: tampilkan status di halaman (bukan alert) ─
+            const statusDiv    = document.getElementById('scan-status');
+            const loadingDiv   = document.getElementById('loading-overlay');
+            const loadingText  = document.getElementById('loading-text');
+
+            function showStatus(msg, type = 'error') {
+                if (!statusDiv) return;
+                statusDiv.className = 'my-3 px-4 py-3 rounded-lg text-sm font-medium ' + (
+                    type === 'success'
+                        ? 'bg-green-100 text-green-800'
+                        : type === 'info'
+                            ? 'bg-blue-100 text-blue-800'
+                            : 'bg-red-100 text-red-800'
+                );
+                statusDiv.textContent = msg;
+                statusDiv.classList.remove('hidden');
+            }
+
+            function hideStatus() {
+                statusDiv?.classList.add('hidden');
+            }
+
+            function showLoading(msg = 'Memproses...') {
+                if (!loadingDiv) return;
+                loadingText.textContent = msg;
+                loadingDiv.classList.remove('hidden');
+                loadingDiv.classList.add('flex');
+            }
+
+            function hideLoading() {
+                loadingDiv?.classList.add('hidden');
+                loadingDiv?.classList.remove('flex');
+            }
+
+            // ── QR SCANNER ────────────────────────────────────────
+            const scanButton        = document.getElementById('scan-button');
+            const scannerContainer  = document.getElementById('scanner-container');
+            const closeScannerButton= document.getElementById('close-scanner-button');
             let html5QrCode;
 
             function stopScanner() {
                 if (html5QrCode && html5QrCode.isScanning) {
-                    html5QrCode.stop().then(() => {
-                        scannerContainer.style.display = 'none';
-                        scanButton.style.display = 'inline-flex';
-                    }).catch(err => console.error("Gagal menghentikan kamera.", err));
+                    html5QrCode.stop()
+                        .then(() => {
+                            scannerContainer.style.display = 'none';
+                            if (scanButton) scanButton.style.display = 'inline-flex';
+                        })
+                        .catch(err => console.error("Gagal menghentikan kamera:", err));
+                } else {
+                    scannerContainer.style.display = 'none';
+                    if (scanButton) scanButton.style.display = 'inline-flex';
                 }
             }
 
             if (scanButton) {
-                scanButton.addEventListener('click', function() {
+                scanButton.addEventListener('click', function () {
+                    hideStatus();
+
+                    if (typeof Html5Qrcode === 'undefined') {
+                        showStatus('Library scanner belum termuat. Periksa koneksi internet Anda, lalu muat ulang halaman.');
+                        return;
+                    }
+
                     scannerContainer.style.display = 'block';
                     this.style.display = 'none';
 
                     if (!html5QrCode) {
                         html5QrCode = new Html5Qrcode("qr-reader");
                     }
-                    
+
                     html5QrCode.start(
                         { facingMode: "environment" },
                         { fps: 10, qrbox: { width: 250, height: 250 } },
                         onScanSuccess,
-                        (error) => { /* Abaikan error scan, biarkan kamera terus berjalan */ }
+                        () => {} // abaikan error per-frame
                     ).catch(err => {
-                        alert("Tidak dapat memulai kamera. Pastikan Anda memberikan izin.");
-                        stopScanner(); // Hentikan jika gagal memulai
+                        console.error("Gagal memulai kamera:", err);
+                        showStatus('Tidak dapat mengakses kamera. Pastikan izin kamera sudah diberikan di browser Anda.');
+                        stopScanner();
                     });
                 });
             }
-            
+
             if (closeScannerButton) {
-                closeScannerButton.addEventListener('click', stopScanner);
+                closeScannerButton.addEventListener('click', () => {
+                    stopScanner();
+                    hideStatus();
+                    hideLoading();
+                });
             }
 
-            function onScanSuccess(decodedText, decodedResult) {
-                // Hentikan scanner setelah berhasil
+            // ── SETELAH QR BERHASIL DISCAN ────────────────────────
+            function onScanSuccess(decodedText) {
                 stopScanner();
-                
-                // Isi form dan submit
                 document.getElementById('qr_token').value = decodedText;
-                
-                navigator.geolocation.getCurrentPosition(position => {
-                    const locationString = `${position.coords.latitude},${position.coords.longitude}`;
-                    document.getElementById('location').value = locationString;
+
+                // Coba dapatkan GPS; jika gagal/tidak ada, tetap submit tanpa lokasi
+                if (navigator.geolocation) {
+                    showLoading('Mendeteksi lokasi GPS...');
+                    
+                    let timeLeft = 3;
+                    showStatus(`QR berhasil dipindai. Mendeteksi lokasi GPS (${timeLeft} detik)...`, 'info');
+                    
+                    const countdownInterval = setInterval(() => {
+                        timeLeft--;
+                        if (timeLeft >= 0) {
+                            showStatus(`QR berhasil dipindai. Mendeteksi lokasi GPS (${timeLeft} detik)...`, 'info');
+                        } else {
+                            clearInterval(countdownInterval);
+                        }
+                    }, 1000);
+
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            clearInterval(countdownInterval);
+                            const loc = `${position.coords.latitude},${position.coords.longitude}`;
+                            document.getElementById('location').value = loc;
+                            showLoading('Menyimpan absensi...');
+                            document.getElementById('attendance-form').submit();
+                        },
+                        error => {
+                            clearInterval(countdownInterval);
+                            // GPS gagal — tetap submit, lokasi akan kosong
+                            console.warn("GPS gagal:", error.message);
+                            let info = 'GPS tidak terdeteksi. Absensi diproses tanpa data lokasi.';
+                            if (error.code === 1) info = 'Izin GPS ditolak. Absensi diproses tanpa data lokasi.';
+                            showStatus(info, 'info');
+                            showLoading('Menyimpan absensi...');
+                            document.getElementById('location').value = '';
+                            document.getElementById('attendance-form').submit();
+                        },
+                        { enableHighAccuracy: false, timeout: 3000, maximumAge: 60000 }
+                    );
+                } else {
+                    // Browser tidak support geolocation — tetap submit
+                    showLoading('Menyimpan absensi...');
+                    document.getElementById('location').value = '';
                     document.getElementById('attendance-form').submit();
-                }, () => {
-                    alert('Gagal mendapatkan lokasi GPS. Pastikan izin lokasi aktif.');
-                    scanButton.style.display = 'inline-flex'; // Munculkan lagi tombol scan jika GPS gagal
-                });
+                }
             }
         });
     </script>
     @endpush
 </x-app-layout>
+
