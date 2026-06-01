@@ -3,25 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistem Absensi & HRIS</title>
+    <title>Portal HRIS | PT Defourd Sejahtera Bersama</title>
 
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-    <link rel="preload" href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700,800,900&display=swap" rel="stylesheet"></noscript>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <script>
-        if (localStorage.theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark');
-            localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        }
-    </script>
 
     <style>
         body {
@@ -30,81 +20,59 @@
 
         .premium-bg {
             background:
-                radial-gradient(circle at 18% 20%, rgba(26, 47, 107, 0.15), transparent 26%),
-                radial-gradient(circle at 85% 25%, rgba(45, 168, 74, 0.12), transparent 28%),
-                radial-gradient(circle at 50% 90%, rgba(30, 95, 168, 0.08), transparent 34%),
-                linear-gradient(135deg, rgba(240, 244, 255, 0.88) 0%, rgba(234, 245, 238, 0.88) 45%, rgba(219, 234, 254, 0.88) 100%),
-                url("{{ asset('images/gedung.jpg') }}") no-repeat center center / cover;
-            background-attachment: fixed;
-        }
-
-        .dark .premium-bg {
-            background:
-                radial-gradient(circle at 18% 20%, rgba(26, 47, 107, 0.22), transparent 26%),
-                radial-gradient(circle at 85% 25%, rgba(45, 168, 74, 0.15), transparent 28%),
-                radial-gradient(circle at 50% 90%, rgba(30, 95, 168, 0.10), transparent 34%),
-                linear-gradient(135deg, rgba(5, 9, 26, 0.92) 0%, rgba(8, 16, 32, 0.92) 48%, rgba(6, 14, 18, 0.92) 100%),
+                radial-gradient(circle at 12% 15%, rgba(26, 47, 107, 0.08), transparent 30%),
+                radial-gradient(circle at 88% 25%, rgba(45, 168, 74, 0.06), transparent 30%),
+                radial-gradient(circle at 50% 85%, rgba(30, 95, 168, 0.04), transparent 35%),
+                linear-gradient(135deg, rgba(245, 248, 255, 0.94) 0%, rgba(238, 247, 242, 0.94) 50%, rgba(232, 242, 255, 0.94) 100%),
                 url("{{ asset('images/gedung.jpg') }}") no-repeat center center / cover;
             background-attachment: fixed;
         }
 
         .digital-grid {
             background-image:
-                linear-gradient(rgba(26, 47, 107, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(26, 47, 107, 0.08) 1px, transparent 1px);
-            background-size: 46px 46px;
-            mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
-        }
-
-        .dark .digital-grid {
-            background-image:
-                linear-gradient(rgba(45, 168, 74, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(45, 168, 74, 0.08) 1px, transparent 1px);
+                linear-gradient(rgba(26, 47, 107, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 47, 107, 0.05) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, black 25%, transparent 88%);
         }
 
         .glass {
-            background: rgba(250, 250, 249, 0.92);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.80);
-            box-shadow: 0 8px 40px rgba(15, 23, 42, 0.10);
-        }
-
-        .dark .glass {
-            background: rgba(15, 23, 20, 0.90);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.30);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 35px -8px rgba(15, 23, 42, 0.08);
         }
 
         .soft-card {
             background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(231, 229, 228, 0.95);
-            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .dark .soft-card {
-            background: rgba(15, 23, 20, 0.95);
-            border: 1px solid rgba(148, 163, 184, 0.18);
+        .soft-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.1);
         }
 
         @keyframes floatUp {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-14px); }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 0 rgba(26, 47, 107, 0.0); }
-            50% { box-shadow: 0 0 45px rgba(26, 47, 107, 0.35); }
+            50% { transform: translateY(-8px); }
         }
 
         .float-up {
-            animation: floatUp 5.5s ease-in-out infinite;
+            animation: floatUp 6.5s ease-in-out infinite;
             will-change: transform;
         }
 
         .pulse-glow {
-            animation: pulseGlow 4s ease-in-out infinite;
-            will-change: box-shadow;
+            box-shadow: 0 0 20px rgba(26, 47, 107, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .pulse-glow:hover {
+            box-shadow: 0 0 25px rgba(26, 47, 107, 0.15);
         }
 
         /* Page Loader */
@@ -115,11 +83,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #f0f4ff 0%, #eaf5ee 100%);
-            transition: opacity 0.35s ease, visibility 0.35s ease;
-        }
-        .dark #page-loader {
-            background: linear-gradient(135deg, #05091a 0%, #081020 100%);
+            background: #ffffff;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
         #page-loader.hidden {
             opacity: 0;
@@ -127,52 +92,48 @@
             pointer-events: none;
         }
         .loader-ring {
-            width: 48px;
-            height: 48px;
-            border: 4px solid rgba(26, 47, 107, 0.15);
+            width: 44px;
+            height: 44px;
+            border: 3.5px solid rgba(26, 47, 107, 0.08);
             border-top-color: #1a2f6b;
             border-radius: 50%;
-            animation: spin 0.7s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Lazy sections */
-        .lazy-section {
-            content-visibility: auto;
-            contain-intrinsic-size: 0 400px;
-        }
     </style>
 </head>
 
-<body class="min-h-screen premium-bg text-slate-800 dark:text-slate-100 transition-colors duration-500">
+<body class="min-h-screen premium-bg text-slate-800 transition-colors duration-300">
 
     {{-- Page Loader --}}
     <div id="page-loader">
         <div class="text-center">
             <div class="loader-ring mx-auto"></div>
-            <p class="mt-4 text-sm font-semibold text-slate-500 dark:text-slate-400">Memuat...</p>
+            <p class="mt-4 text-xs font-bold uppercase tracking-widest text-slate-400">PT Defourd Sejahtera Bersama</p>
         </div>
     </div>
 
     <main class="relative min-h-screen overflow-hidden">
 
         {{-- Background digital --}}
-        <div class="absolute inset-0 digital-grid opacity-80"></div>
-        <div class="absolute -top-36 -left-24 w-64 h-64 rounded-full blur-2xl" style="background:rgba(26,47,107,0.15)"></div>
-        <div class="absolute top-28 -right-24 w-64 h-64 rounded-full blur-2xl" style="background:rgba(45,168,74,0.15)"></div>
+        <div class="absolute inset-0 digital-grid opacity-90"></div>
+        <div class="absolute -top-36 -left-24 w-72 h-72 rounded-full blur-3xl" style="background:rgba(26,47,107,0.1)"></div>
+        <div class="absolute top-28 -right-24 w-72 h-72 rounded-full blur-3xl" style="background:rgba(45,168,74,0.08)"></div>
 
         {{-- Navbar --}}
         <nav class="relative z-50 px-5 pt-6">
             <div class="max-w-7xl mx-auto h-20 px-5 md:px-7 rounded-[1.75rem] glass flex items-center justify-between">
                 <div class="flex items-center gap-4">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-12 h-12 rounded-2xl object-contain pulse-glow">
+                    <div class="p-1 bg-white rounded-xl shadow-sm border border-transparent">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-11 h-11 object-contain">
+                    </div>
 
                     <div>
-                        <h1 class="text-lg md:text-xl font-black text-slate-950 dark:text-white leading-tight">
-                            Absensi HRIS
+                        <h1 class="text-base md:text-lg font-black tracking-wider text-slate-900 uppercase leading-none">
+                            PT Defourd SB
                         </h1>
-                        <p class="hidden sm:block text-xs text-slate-500 dark:text-slate-400">
-                            Smart Attendance System
+                        <p class="hidden sm:block text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                            Human Resource Portal
                         </p>
                     </div>
                 </div>
@@ -180,19 +141,19 @@
                 <div class="flex items-center gap-3">
                     @auth
                         <a href="{{ route('dashboard') }}"
-                           class="px-5 md:px-6 py-3 rounded-2xl text-white font-black shadow-xl hover:-translate-y-1 transition" style="background:linear-gradient(to right,#1a2f6b,#1e5fa8)">
+                           class="px-6 py-3 rounded-xl text-white text-sm font-extrabold uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 ease-out cursor-pointer" style="background:linear-gradient(to right,#1a2f6b,#1e5fa8)">
                             Dashboard →
                         </a>
                     @else
                         <a href="{{ route('login') }}"
-                           class="px-5 md:px-6 py-3 rounded-2xl bg-white/90 dark:bg-slate-800 text-slate-900 dark:text-white font-black border border-slate-200 dark:border-slate-700 hover:-translate-y-1 hover:shadow-xl transition">
+                           class="px-6 py-3 rounded-xl bg-white/90 text-slate-800 text-sm font-extrabold uppercase tracking-wider border border-slate-200 hover:scale-105 active:scale-95 hover:shadow-lg transition-all duration-300 ease-out cursor-pointer">
                             Login
                         </a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                               class="hidden sm:inline-flex px-5 md:px-6 py-3 rounded-2xl text-white font-black shadow-xl hover:-translate-y-1 transition" style="background:linear-gradient(to right,#1a2f6b,#1e5fa8)">
-                                Register →
+                               class="hidden sm:inline-flex px-6 py-3 rounded-xl text-white text-sm font-extrabold uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 ease-out cursor-pointer" style="background:linear-gradient(to right,#1a2f6b,#1e5fa8)">
+                                Register
                             </a>
                         @endif
                     @endauth
@@ -207,33 +168,50 @@
                 {{-- Left hero --}}
                 <div class="lg:col-span-7 text-center lg:text-left">
 
-                    <img src="{{ asset('images/logo.png') }}" alt="Sistem Absensi & HRIS Digital" class="-my-4 max-w-xs md:max-w-sm lg:max-w-md w-full h-auto object-contain" style="max-height:220px">
+                    <div class="flex justify-center lg:justify-start">
+                        <img src="{{ asset('images/logo.png') }}" alt="Sistem Absensi & HRIS Digital" class="max-w-xs md:max-w-sm lg:max-w-md w-full h-auto object-contain" style="max-height:180px">
+                    </div>
 
-                    <p class="mt-7 text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto lg:mx-0 leading-relaxed">
-                        Platform manajemen absensi QR Code berbasis GPS, cuti, lembur, dan slip gaji digital
-                        yang modern, aman, dan mudah digunakan untuk kebutuhan perusahaan PT Defourd Sejahtera Bersama.
+                    <p class="mt-8 text-sm md:text-base text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                        Sistem informasi manajemen absensi QR Code presisi berbasis GPS, perizinan cuti, pelaporan lembur, dan slip gaji elektronik yang akuntabel di lingkungan internal <strong class="text-slate-900">PT Defourd Sejahtera Bersama</strong>.
                     </p>
 
-                    <div class="mt-10 flex justify-center lg:justify-start gap-4 flex-wrap">
+                    <div class="mt-10 mb-8 flex justify-center lg:justify-start">
                         <a href="{{ route('login') }}"
-                           class="px-8 py-4 rounded-2xl text-white font-black shadow-2xl hover:-translate-y-1 transition" style="background:linear-gradient(to right,#1a2f6b,#2da84a)">
+                           class="inline-flex items-center justify-center px-8 py-4 rounded-2xl text-white text-base font-black uppercase tracking-wider shadow-2xl hover:scale-105 active:scale-95 hover:shadow-3xl hover:brightness-110 transition-all duration-300 ease-out cursor-pointer" style="background:linear-gradient(to right,#1a2f6b,#2da84a)">
                             Masuk Sekarang →
                         </a>
                     </div>
 
                     {{-- Mini stats --}}
-                    <div class="mt-10 grid grid-cols-3 gap-4 max-w-xl mx-auto lg:mx-0">
-                        <div class="soft-card rounded-2xl p-4 text-center">
-                            <h3 class="text-2xl font-black text-slate-950 dark:text-white">GPS</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Validasi Lokasi</p>
+                    <div class="mt-16 grid grid-cols-3 gap-4 max-w-xl mx-auto lg:mx-0">
+                        <div class="soft-card rounded-2xl p-4 text-center border-t-4 border-[#1a2f6b]">
+                            <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center mx-auto text-[#1a2f6b] mb-2">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-black text-[#1a2f6b]">GPS Validation</h3>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Verifikasi Lokasi</p>
                         </div>
-                        <div class="soft-card rounded-2xl p-4 text-center">
-                            <h3 class="text-2xl font-black text-slate-950 dark:text-white">QR</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Scan Absensi</p>
+                        <div class="soft-card rounded-2xl p-4 text-center border-t-4 border-[#2da84a]">
+                            <div class="w-7 h-7 rounded-lg bg-green-50 flex items-center justify-center mx-auto text-[#2da84a] mb-2">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-black text-[#2da84a]">QR Presence</h3>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Scan Absensi</p>
                         </div>
-                        <div class="soft-card rounded-2xl p-4 text-center">
-                            <h3 class="text-2xl font-black text-slate-950 dark:text-white">PDF</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Slip Gaji</p>
+                        <div class="soft-card rounded-2xl p-4 text-center border-t-4 border-[#1a2f6b]">
+                            <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center mx-auto text-[#1a2f6b] mb-2">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-black text-[#1a2f6b]">Digital Payslip</h3>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Slip Gaji PDF</p>
                         </div>
                     </div>
                 </div>
@@ -241,63 +219,65 @@
                 {{-- Right visual dashboard --}}
                 <div class="lg:col-span-5">
                     <div class="relative max-w-md mx-auto float-up">
-                        <div class="absolute -inset-5 rounded-[2.5rem] blur-2xl" style="background:linear-gradient(to right,rgba(26,47,107,0.20),rgba(45,168,74,0.15))"></div>
+                        <div class="absolute -inset-5 rounded-[2.5rem] blur-2xl" style="background:linear-gradient(to right,rgba(26,47,107,0.2),rgba(45,168,74,0.15))"></div>
 
-                        <div class="relative glass rounded-[2rem] p-5">
-                            <div class="flex items-center justify-between mb-5">
+                        <div class="relative glass rounded-[2rem] p-6 border border-slate-200">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
                                 <div>
-                                    <p class="text-sm text-slate-500 dark:text-slate-400 font-semibold">Dashboard Preview</p>
-                                    <h3 class="text-2xl font-black text-slate-950 dark:text-white">HRIS Overview</h3>
+                                    <p class="text-[10px] text-slate-500 font-extrabold uppercase tracking-widest">Dashboard Preview</p>
+                                    <h3 class="text-xl font-extrabold text-slate-900">HRIS Overview</h3>
                                 </div>
-                                <div class="w-12 h-12 rounded-2xl text-white flex items-center justify-center text-2xl shadow-lg" style="background:linear-gradient(135deg,#1a2f6b,#1e5fa8)">
-                                    📊
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4 mb-4">
-                                <div class="rounded-3xl text-white p-5 shadow-lg" style="background:linear-gradient(135deg,#1a2f6b,#1e5fa8)">
-                                    <p class="text-sm opacity-80">Hadir Hari Ini</p>
-                                    <h4 class="text-4xl font-black mt-2">{{ $hadirHariIniPersen }}%</h4>
-                                </div>
-                                <div class="rounded-3xl bg-white/85 dark:bg-slate-800 p-5 border border-slate-100 dark:border-slate-700">
-                                    <p class="text-sm text-slate-500 dark:text-slate-400">Cuti Aktif</p>
-                                    <h4 class="text-4xl font-black mt-2 text-slate-950 dark:text-white">{{ $cutiAktifCount }}</h4>
+                                <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center shadow-md" style="background:linear-gradient(135deg,#1a2f6b,#2da84a)">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                    </svg>
                                 </div>
                             </div>
 
-                            <div class="rounded-3xl bg-white/85 dark:bg-slate-800 p-5 border border-slate-100 dark:border-slate-700">
+                            <div class="grid grid-cols-2 gap-4 mb-5">
+                                <div class="rounded-2xl text-white p-4 shadow-md" style="background:linear-gradient(135deg,#1a2f6b,#1e5fa8)">
+                                    <p class="text-[10px] uppercase font-bold opacity-85 tracking-wider">Hadir Hari Ini</p>
+                                    <h4 class="text-3xl font-black mt-1">{{ $hadirHariIniPersen }}%</h4>
+                                </div>
+                                <div class="rounded-2xl bg-white/80 p-4 border border-slate-200 shadow-sm">
+                                    <p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Cuti Aktif</p>
+                                    <h4 class="text-3xl font-black mt-1 text-slate-900">{{ $cutiAktifCount }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="rounded-2xl bg-white/80 p-5 border border-slate-200 shadow-sm">
                                 <div class="flex items-center justify-between mb-4">
-                                    <h4 class="font-black text-slate-950 dark:text-white">Aktivitas Absensi</h4>
-                                    <span class="text-xs px-3 py-1 rounded-full font-black" style="background:#edfff2;color:#2da84a">Live</span>
+                                    <h4 class="text-xs uppercase font-extrabold tracking-wider text-slate-700">Aktivitas Absensi</h4>
+                                    <span class="text-[9px] px-2 py-0.5 rounded-full font-bold uppercase bg-green-100 text-green-600">Live Status</span>
                                 </div>
 
                                 <div class="space-y-4">
                                     <div>
-                                        <div class="flex justify-between text-sm mb-2">
-                                            <span class="font-bold text-slate-600 dark:text-slate-300">QR Check-in</span>
-                                            <span class="font-black" style="color:#1a2f6b">{{ $qrCheckInPersen }}%</span>
+                                        <div class="flex justify-between text-xs mb-1.5 font-bold">
+                                            <span class="text-slate-600">QR Check-in</span>
+                                            <span class="font-black text-blue-600">{{ $qrCheckInPersen }}%</span>
                                         </div>
-                                        <div class="h-3 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+                                        <div class="h-2 rounded-full bg-slate-200 overflow-hidden">
                                             <div class="h-full rounded-full" style="width: {{ $qrCheckInPersen }}%; background:linear-gradient(to right,#1a2f6b,#1e5fa8)"></div>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <div class="flex justify-between text-sm mb-2">
-                                            <span class="font-bold text-slate-600 dark:text-slate-300">Valid GPS</span>
-                                            <span class="font-black" style="color:#2da84a">{{ $validGpsPersen }}%</span>
+                                        <div class="flex justify-between text-xs mb-1.5 font-bold">
+                                            <span class="text-slate-600">Valid GPS Location</span>
+                                            <span class="font-black text-green-600">{{ $validGpsPersen }}%</span>
                                         </div>
-                                        <div class="h-3 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+                                        <div class="h-2 rounded-full bg-slate-200 overflow-hidden">
                                             <div class="h-full rounded-full" style="width: {{ $validGpsPersen }}%; background:linear-gradient(to right,#2da84a,#166534)"></div>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <div class="flex justify-between text-sm mb-2">
-                                            <span class="font-bold text-slate-600 dark:text-slate-300">Slip Gaji</span>
-                                            <span class="font-black" style="color:#1e5fa8">{{ $slipGajiPersen }}%</span>
+                                        <div class="flex justify-between text-xs mb-1.5 font-bold">
+                                            <span class="text-slate-600">Slip Gaji Terproses</span>
+                                            <span class="font-black text-blue-600">{{ $slipGajiPersen }}%</span>
                                         </div>
-                                        <div class="h-3 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+                                        <div class="h-2 rounded-full bg-slate-200 overflow-hidden">
                                             <div class="h-full rounded-full" style="width: {{ $slipGajiPersen }}%; background:linear-gradient(to right,#1e5fa8,#2da84a)"></div>
                                         </div>
                                     </div>
@@ -305,17 +285,30 @@
                             </div>
 
                             <div class="mt-4 grid grid-cols-3 gap-3">
-                                <div class="rounded-2xl bg-white/85 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-3 text-center">
-                                    <div class="text-2xl">📱</div>
-                                    <p class="text-xs mt-1 font-bold text-slate-500 dark:text-slate-400">QR</p>
+                                <div class="rounded-xl bg-white/80 border border-slate-200 p-3 text-center shadow-sm">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center mx-auto text-[#1a2f6b]">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">QR Code</p>
                                 </div>
-                                <div class="rounded-2xl bg-white/85 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-3 text-center">
-                                    <div class="text-2xl">📍</div>
-                                    <p class="text-xs mt-1 font-bold text-slate-500 dark:text-slate-400">GPS</p>
+                                <div class="rounded-xl bg-white/80 border border-slate-200 p-3 text-center shadow-sm">
+                                    <div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center mx-auto text-[#2da84a]">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">GPS Track</p>
                                 </div>
-                                <div class="rounded-2xl bg-white/85 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-3 text-center">
-                                    <div class="text-2xl">💰</div>
-                                    <p class="text-xs mt-1 font-bold text-slate-500 dark:text-slate-400">Payroll</p>
+                                <div class="rounded-xl bg-white/80 border border-slate-200 p-3 text-center shadow-sm">
+                                    <div class="w-8 h-8 rounded-lg bg-yellow-50 flex items-center justify-center mx-auto text-yellow-600">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M12 16v1M10 11h4" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">Payroll</p>
                                 </div>
                             </div>
                         </div>
