@@ -33,7 +33,7 @@ Sistem ini dilengkapi dengan serangkaian fitur komprehensif untuk manajemen kary
 Sistem login yang aman dengan tiga tingkat akses berbeda:
 - **Admin**: Memiliki akses penuh ke seluruh sistem, termasuk manajemen pengguna dan pengaturan.
 - **Atasan**: Dapat menyetujui atau menolak pengajuan lembur dan cuti dari bawahannya.
-- **Karyawan**: Dapat melakukan absensi, melihat riwayat, dan mengajukan lembur atau cuti.
+- **Karyawan**: Dapat melakukan absensi, melihat riwayat, dan mengajukan cuti atau lembur.
 
 ### ✅ Absensi Real-time dengan Validasi Canggih
 - **Validasi QR Code**: Kode QR unik yang digenerate setiap hari untuk mencegah kecurangan.
@@ -49,7 +49,7 @@ Sistem login yang aman dengan tiga tingkat akses berbeda:
 - Fitur cetak Slip Gaji individual dalam format PDF yang profesional.
 
 ### 📊 Pelaporan & Audit
-- Laporan Absensi Bulanan per karyawan.
+- Laporan Absensi & Cuti Bulanan.
 - Audit Log untuk melacak semua aktivitas penting yang terjadi di dalam sistem.
 
 ### ⚙️ Pengaturan Sistem Dinamis
@@ -58,7 +58,7 @@ Sistem login yang aman dengan tiga tingkat akses berbeda:
 ## 🛠️ Teknologi yang Digunakan
 | Komponen       | Teknologi                               |
 |----------------|-----------------------------------------|
-| Backend        | PHP 8.2, Laravel 13                     |
+| Backend        | PHP 8.4, Laravel 13                     |
 | Frontend       | Blade, Tailwind CSS, Alpine.js          |
 | Database       | MySQL / MariaDB                         |
 | Server Lokal   | XAMPP / Laragon                         |
