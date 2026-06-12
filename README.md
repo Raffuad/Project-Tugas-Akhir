@@ -16,6 +16,7 @@ Aplikasi ini mengelola alur kerja esensial manajemen sumber daya manusia, mulai 
 > "Aku tidak berilmu; yang berilmu hanyalah DIA. Jika tampak ilmu dariku, itu hanyalah pantulan dari Cahaya-Nya."
 
 ## 🎥 Demo
+https://drive.google.com/file/d/17cMg1--UDvhl4-Fg2YTims8qrroXu-Db/view?usp=drive_link
 
 
 ## 📖 Daftar Isi
