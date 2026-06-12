@@ -6,11 +6,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 </p>
 
-# 💼 Sistem Absensi & Penggajian Karyawan (Laravel 13)
+# 💼 Sistem Absensi & Cuti Karyawan
 
 Selamat datang di Sistem Absensi & HRIS, sebuah aplikasi web komprehensif yang dibangun dari nol menggunakan Laravel 13. Proyek ini dirancang sebagai studi kasus nyata untuk mendemonstrasikan implementasi arsitektur Laravel yang bersih, aman, dan profesional.
 
-Aplikasi ini mengelola alur kerja esensial manajemen sumber daya manusia, mulai dari absensi harian dengan validasi canggih, alur persetujuan lembur dan cuti, hingga perhitungan gaji otomatis yang siap cetak dalam format PDF. Semua disajikan dalam antarmuka yang modern, responsif, dan intuitif berkat Tailwind CSS.
+Aplikasi ini mengelola alur kerja esensial manajemen sumber daya manusia, mulai dari absensi harian dengan validasi canggih, alur persetujuan cuti lembur, hingga perhitungan gaji otomatis yang siap cetak dalam format PDF. Semua disajikan dalam antarmuka yang modern, responsif, dan intuitif berkat Tailwind CSS.
 
 ## ✨ Kutipan
 > "Aku tidak berilmu; yang berilmu hanyalah DIA. Jika tampak ilmu dariku, itu hanyalah pantulan dari Cahaya-Nya."
