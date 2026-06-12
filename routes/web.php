@@ -57,28 +57,22 @@ Route::get('/', function () {
         ->whereDate('end_date', '>=', now()->toDateString())
         ->count();
 
-    // 3. QR Check-in Persen
-    $qrCheckInPersen = $hadirHariIniPersen;
+    // 3. Absensi Persen
+    $absensiPersen = $hadirHariIniPersen;
 
-    // 4. Valid GPS Persen
-    $todayAttendances = \App\Models\Attendance::whereDate('attendance_date', now()->toDateString())->get();
-    $validGpsCount = $todayAttendances->filter(function($att) {
-        return $att->check_in_location && $att->check_in_location !== 'Lokasi tidak tersedia';
-    })->count();
-    $validGpsPersen = $todayAttendances->count() > 0 
-        ? round(($validGpsCount / $todayAttendances->count()) * 100) 
-        : 0;
+    // 4. Cuti Persen
+    $cutiPersen = $totalKaryawan > 0 ? round(($cutiAktifCount / $totalKaryawan) * 100) : 0;
 
-    // 5. Slip Gaji Terproses
-    $gajiSetCount = \App\Models\User::where('role', 'karyawan')->where('gaji_pokok', '>', 0)->count();
-    $slipGajiPersen = $totalKaryawan > 0 ? round(($gajiSetCount / $totalKaryawan) * 100) : 0;
+    // 5. Laporan Persen (Karyawan yang sudah absen bulan ini)
+    $laporanCount = \App\Models\Attendance::whereMonth('attendance_date', now()->month)->distinct('user_id')->count('user_id');
+    $laporanPersen = $totalKaryawan > 0 ? round(($laporanCount / $totalKaryawan) * 100) : 0;
 
     return view('welcome', compact(
         'hadirHariIniPersen',
         'cutiAktifCount',
-        'qrCheckInPersen',
-        'validGpsPersen',
-        'slipGajiPersen'
+        'absensiPersen',
+        'cutiPersen',
+        'laporanPersen'
     ));
 });
 

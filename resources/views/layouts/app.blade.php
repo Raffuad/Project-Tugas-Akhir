@@ -33,8 +33,8 @@
                             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-full h-full object-contain">
                         </div>
                         <div>
-                            <div class="font-black text-sm text-white">Absensi HRIS</div>
-                            <div class="text-xs" style="color:rgba(255,255,255,0.45)">PT Defourd SB</div>
+                            <div class="font-black text-sm text-white">Sistem HR DSB</div>
+                            <div class="text-xs" style="color:rgba(255,255,255,0.45)">Manajemen Absensi & Cuti</div>
                         </div>
                     </a>
                 </div>

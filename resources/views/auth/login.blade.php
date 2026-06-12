@@ -125,15 +125,9 @@
                         Secure Login Portal
                     </span>
 
-                    <h1 class="text-5xl font-black leading-tight mb-5">
+                    <h1 class="text-5xl font-black leading-tight mb-2">
                         Selamat datang kembali.
                     </h1>
-
-                    <p class="text-lg leading-relaxed max-w-md" style="color:rgba(200,225,210,0.9)">
-                        Masuk ke sistem untuk mengelola absensi QR Code berbasis GPS, cuti, lembur, dan slip gaji digital dengan lebih cepat dan terstruktur.
-                    </p>
-
-                   
                 </div>
 
                 <div class="text-sm" style="color:rgba(180,215,195,0.85)">

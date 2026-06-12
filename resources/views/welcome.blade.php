@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Portal HRIS | PT Defourd Sejahtera Bersama</title>
+    <title>Portal Absensi HRIS DSB</title>
 
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
@@ -130,10 +130,10 @@
 
                     <div>
                         <h1 class="text-base md:text-lg font-black tracking-wider text-slate-900 uppercase leading-none">
-                            PT Defourd SB
+                            DEFOURD HR SYSTEM
                         </h1>
                         <p class="hidden sm:block text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-                            Human Resource Portal
+                            ATTENDANCE & LEAVE MANAGEMENT
                         </p>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                     </div>
 
                     <p class="mt-8 text-sm md:text-base text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                        Sistem informasi manajemen absensi QR Code presisi berbasis GPS, perizinan cuti, pelaporan lembur, dan slip gaji elektronik yang akuntabel di lingkungan internal <strong class="text-slate-900">PT Defourd Sejahtera Bersama</strong>.
+                       Sistem informasi manajemen absensi dan cuti berbasis web yang membantu proses pencatatan kehadiran, pengajuan cuti, persetujuan, serta pelaporan karyawan secara lebih efektif di lingkungan <strong class="text-slate-900">PT Defourd Sejahtera Bersama</strong>.
                     </p>
 
                     <div class="mt-10 mb-8 flex justify-center lg:justify-start">
@@ -188,30 +188,29 @@
                         <div class="soft-card rounded-2xl p-4 text-center border-t-4 border-[#1a2f6b]">
                             <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center mx-auto text-[#1a2f6b] mb-2">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                 </svg>
                             </div>
-                            <h3 class="text-sm font-black text-[#1a2f6b]">GPS Validation</h3>
-                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Verifikasi Lokasi</p>
+                            <h3 class="text-sm font-black text-[#1a2f6b]">QR Attendance</h3>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Scan Absensi</p>
                         </div>
                         <div class="soft-card rounded-2xl p-4 text-center border-t-4 border-[#2da84a]">
                             <div class="w-7 h-7 rounded-lg bg-green-50 flex items-center justify-center mx-auto text-[#2da84a] mb-2">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                             </div>
-                            <h3 class="text-sm font-black text-[#2da84a]">QR Presence</h3>
-                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Scan Absensi</p>
+                            <h3 class="text-sm font-black text-[#2da84a]">Leave Request</h3>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Pengajuan Cuti</p>
                         </div>
                         <div class="soft-card rounded-2xl p-4 text-center border-t-4 border-[#1a2f6b]">
                             <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center mx-auto text-[#1a2f6b] mb-2">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                             </div>
-                            <h3 class="text-sm font-black text-[#1a2f6b]">Digital Payslip</h3>
-                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Slip Gaji PDF</p>
+                            <h3 class="text-sm font-black text-[#1a2f6b]">HR Report</h3>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Rekap Laporan</p>
                         </div>
                     </div>
                 </div>
@@ -254,31 +253,31 @@
                                 <div class="space-y-4">
                                     <div>
                                         <div class="flex justify-between text-xs mb-1.5 font-bold">
-                                            <span class="text-slate-600">QR Check-in</span>
-                                            <span class="font-black text-blue-600">{{ $qrCheckInPersen }}%</span>
+                                            <span class="text-slate-600">ABSENSI</span>
+                                            <span class="font-black text-blue-600">{{ $absensiPersen }}%</span>
                                         </div>
                                         <div class="h-2 rounded-full bg-slate-200 overflow-hidden">
-                                            <div class="h-full rounded-full" style="width: {{ $qrCheckInPersen }}%; background:linear-gradient(to right,#1a2f6b,#1e5fa8)"></div>
+                                            <div class="h-full rounded-full" style="width: {{ $absensiPersen }}%; background:linear-gradient(to right,#1a2f6b,#1e5fa8)"></div>
                                         </div>
                                     </div>
 
                                     <div>
                                         <div class="flex justify-between text-xs mb-1.5 font-bold">
-                                            <span class="text-slate-600">Valid GPS Location</span>
-                                            <span class="font-black text-green-600">{{ $validGpsPersen }}%</span>
+                                            <span class="text-slate-600">CUTI</span>
+                                            <span class="font-black text-green-600">{{ $cutiPersen }}%</span>
                                         </div>
                                         <div class="h-2 rounded-full bg-slate-200 overflow-hidden">
-                                            <div class="h-full rounded-full" style="width: {{ $validGpsPersen }}%; background:linear-gradient(to right,#2da84a,#166534)"></div>
+                                            <div class="h-full rounded-full" style="width: {{ $cutiPersen }}%; background:linear-gradient(to right,#2da84a,#166534)"></div>
                                         </div>
                                     </div>
 
                                     <div>
                                         <div class="flex justify-between text-xs mb-1.5 font-bold">
-                                            <span class="text-slate-600">Slip Gaji Terproses</span>
-                                            <span class="font-black text-blue-600">{{ $slipGajiPersen }}%</span>
+                                            <span class="text-slate-600">LAPORAN</span>
+                                            <span class="font-black text-blue-600">{{ $laporanPersen }}%</span>
                                         </div>
                                         <div class="h-2 rounded-full bg-slate-200 overflow-hidden">
-                                            <div class="h-full rounded-full" style="width: {{ $slipGajiPersen }}%; background:linear-gradient(to right,#1e5fa8,#2da84a)"></div>
+                                            <div class="h-full rounded-full" style="width: {{ $laporanPersen }}%; background:linear-gradient(to right,#1e5fa8,#2da84a)"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -291,24 +290,23 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                         </svg>
                                     </div>
-                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">QR Code</p>
+                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">ABSENSI</p>
                                 </div>
                                 <div class="rounded-xl bg-white/80 border border-slate-200 p-3 text-center shadow-sm">
                                     <div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center mx-auto text-[#2da84a]">
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
                                     </div>
-                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">GPS Track</p>
+                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">CUTI</p>
                                 </div>
                                 <div class="rounded-xl bg-white/80 border border-slate-200 p-3 text-center shadow-sm">
                                     <div class="w-8 h-8 rounded-lg bg-yellow-50 flex items-center justify-center mx-auto text-yellow-600">
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M12 16v1M10 11h4" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
                                     </div>
-                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">Payroll</p>
+                                    <p class="text-[9px] mt-1.5 font-bold uppercase tracking-wider text-slate-600">LAPORAN</p>
                                 </div>
                             </div>
                         </div>
@@ -328,7 +326,6 @@
         });
     </script>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </body>
 </html>
