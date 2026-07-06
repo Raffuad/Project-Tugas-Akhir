@@ -1,11 +1,20 @@
+<?php
+/**
+ * @var int $hadirHariIniPersen
+ * @var int $cutiAktifCount
+ * @var int $absensiPersen
+ * @var int $cutiPersen
+ * @var int $laporanPersen
+ */
+?>
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', \Illuminate\Support\Facades\App::getLocale()) }}" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Portal Absensi HRIS DSB</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ \Illuminate\Support\Facades\URL::asset('images/logo.png') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
     <link rel="preload" href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -24,7 +33,7 @@
                 radial-gradient(circle at 88% 25%, rgba(45, 168, 74, 0.06), transparent 30%),
                 radial-gradient(circle at 50% 85%, rgba(30, 95, 168, 0.04), transparent 35%),
                 linear-gradient(135deg, rgba(245, 248, 255, 0.94) 0%, rgba(238, 247, 242, 0.94) 50%, rgba(232, 242, 255, 0.94) 100%),
-                url("{{ asset('images/gedung.jpg') }}") no-repeat center center / cover;
+                url("{{ \Illuminate\Support\Facades\URL::asset('images/gedung.jpg') }}") no-repeat center center / cover;
             background-attachment: fixed;
         }
 
@@ -125,7 +134,7 @@
             <div class="max-w-7xl mx-auto h-20 px-5 md:px-7 rounded-[1.75rem] glass flex items-center justify-between">
                 <div class="flex items-center gap-4">
                     <div class="p-1 bg-white rounded-xl shadow-sm border border-transparent">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-11 h-11 object-contain">
+                        <img src="{{ \Illuminate\Support\Facades\URL::asset('images/logo.png') }}" alt="Logo" class="w-11 h-11 object-contain">
                     </div>
 
                     <div>
@@ -140,22 +149,17 @@
 
                 <div class="flex items-center gap-3">
                     @auth
-                        <a href="{{ route('dashboard') }}"
+                        <a href="{{ \Illuminate\Support\Facades\URL::route('dashboard') }}"
                            class="px-6 py-3 rounded-xl text-white text-sm font-extrabold uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 ease-out cursor-pointer" style="background:linear-gradient(to right,#1a2f6b,#1e5fa8)">
                             Dashboard →
                         </a>
                     @else
-                        <a href="{{ route('login') }}"
+                        <a href="{{ \Illuminate\Support\Facades\URL::route('login') }}"
                            class="px-6 py-3 rounded-xl bg-white/90 text-slate-800 text-sm font-extrabold uppercase tracking-wider border border-slate-200 hover:scale-105 active:scale-95 hover:shadow-lg transition-all duration-300 ease-out cursor-pointer">
                             Login
                         </a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                               class="hidden sm:inline-flex px-6 py-3 rounded-xl text-white text-sm font-extrabold uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 ease-out cursor-pointer" style="background:linear-gradient(to right,#1a2f6b,#1e5fa8)">
-                                Register
-                            </a>
-                        @endif
+
                     @endauth
                 </div>
             </div>
@@ -169,7 +173,7 @@
                 <div class="lg:col-span-7 text-center lg:text-left">
 
                     <div class="flex justify-center lg:justify-start">
-                        <img src="{{ asset('images/logo.png') }}" alt="Sistem Absensi & HRIS Digital" class="max-w-xs md:max-w-sm lg:max-w-md w-full h-auto object-contain" style="max-height:180px">
+                        <img src="{{ \Illuminate\Support\Facades\URL::asset('images/logo.png') }}" alt="Sistem Absensi & HRIS Digital" class="max-w-xs md:max-w-sm lg:max-w-md w-full h-auto object-contain" style="max-height:180px">
                     </div>
 
                     <p class="mt-8 text-sm md:text-base text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
@@ -177,7 +181,7 @@
                     </p>
 
                     <div class="mt-10 mb-8 flex justify-center lg:justify-start">
-                        <a href="{{ route('login') }}"
+                        <a href="{{ \Illuminate\Support\Facades\URL::route('login') }}"
                            class="inline-flex items-center justify-center px-8 py-4 rounded-2xl text-white text-base font-black uppercase tracking-wider shadow-2xl hover:scale-105 active:scale-95 hover:shadow-3xl hover:brightness-110 transition-all duration-300 ease-out cursor-pointer" style="background:linear-gradient(to right,#1a2f6b,#2da84a)">
                             Masuk Sekarang →
                         </a>
